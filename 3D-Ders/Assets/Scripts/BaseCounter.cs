@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseCounter : MonoBehaviour ,IKitchenObjectParent
+public class BaseCounter : MonoBehaviour, IKitchenObjectParent
 {
     [SerializeField] Transform counterTopPoint;
 
@@ -10,6 +10,10 @@ public class BaseCounter : MonoBehaviour ,IKitchenObjectParent
     public virtual void Interact(Player player)
     {
 
+    }
+    public virtual void InteractAlternate(Player player)
+    {
+        Debug.Log("F Interact Burada");
     }
 
     public Transform GetKitchenObjectFollowTransform()
