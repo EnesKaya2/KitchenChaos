@@ -1,0 +1,24 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class ContainerCounter : BaseCounter
+{
+    public event EventHandler OnPlayerGrabbedObject;
+
+    [SerializeField] KitchenObjectSO kitchenObjectSO;
+    KitchenObject kitchenObject;
+
+    public override void Interact(Player player)
+    {
+        if (kitchenObject == null)
+        {
+            Transform kitchenObjectTransform = Instantiate(kitchenObjectSO.prefab);
+            kitchenObjectTransform.GetComponent<KitchenObject>().SetKitchenObjectParent(player);
+            OnPlayerGrabbedObject?.Invoke(this, EventArgs.Empty);
+        }
+    }
+
+
+}
