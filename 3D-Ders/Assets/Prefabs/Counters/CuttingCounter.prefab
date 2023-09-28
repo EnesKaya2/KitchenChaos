@@ -76,6 +76,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3913321461311464449, guid: f0b8b4f4efc66b3499211744458f25e8,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.33
+      objectReference: {fileID: 0}
     - target: {fileID: 5788018699766033078, guid: f0b8b4f4efc66b3499211744458f25e8,
         type: 3}
       propertyPath: m_Name
@@ -191,6 +196,10 @@ MonoBehaviour:
   kitchenObject: {fileID: 0}
   kitchenObjectSO: {fileID: 0}
   cutKitchenObjectSO: {fileID: 11400000, guid: 820927bf143267440b1233f918fb2bd4, type: 2}
+  cuttingRecipeSOArray:
+  - {fileID: 11400000, guid: 3e9da064d0c5da2429e991dcbe2047ef, type: 2}
+  - {fileID: 11400000, guid: 4af65674edb839a48bb20c0578f99c46, type: 2}
+  - {fileID: 11400000, guid: 6b36d08cc2773fb4d9803b054ab6fae1, type: 2}
 --- !u!4 &8387240057092090393 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5788018699766033080, guid: f0b8b4f4efc66b3499211744458f25e8,

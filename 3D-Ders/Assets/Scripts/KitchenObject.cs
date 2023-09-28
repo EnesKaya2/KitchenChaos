@@ -7,10 +7,11 @@ public class KitchenObject : MonoBehaviour
     [SerializeField] KitchenObjectSO kitchenObjectSO;
     [SerializeField] private IKitchenObjectParent kitchenObjectParent;
 
-    public KitchenObjectSO GetKitchenObject()
+    public KitchenObjectSO GetKitchenObjectSO()
     {
         return kitchenObjectSO;
     }
+
     public void SetKitchenObjectParent(IKitchenObjectParent kitchenObjectParent)
     {
         if (this.kitchenObjectParent != null)
@@ -34,6 +35,15 @@ public class KitchenObject : MonoBehaviour
     public IKitchenObjectParent GetClearCounter()
     {
         return kitchenObjectParent;
+    }
+    public static KitchenObject SpawnKitchenObject(KitchenObjectSO kitchenObjectSO,IKitchenObjectParent kitchenObjectParent)
+    {
+        Transform kitchenObjectTransform = Instantiate(kitchenObjectSO.prefab);
+        KitchenObject kitchenObject = kitchenObjectTransform.GetComponent<KitchenObject>();
+
+        kitchenObject.SetKitchenObjectParent(kitchenObjectParent);
+        
+        return kitchenObject;
     }
 
     public void DestroySelf()
