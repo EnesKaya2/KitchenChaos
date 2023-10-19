@@ -81,7 +81,7 @@ public class StoveCounter : BaseCounter, IHasProgress
                         OnProgressChange?.Invoke(this, new IHasProgress.OnProgressChangeEventArgs
                         {
                             progressNormalized = 0f
-                        }); ;
+                        });
                     }
                     break;
 
@@ -127,12 +127,35 @@ public class StoveCounter : BaseCounter, IHasProgress
             if (player.HasKitchenObject())
             {
 
+                if (player.GetKitchenObject().TryGetPlate(out PlateKitchenObject plateKitchenObject))
+                {
+                    if (plateKitchenObject.TryAddIngredient(GetKitchenObject().GetKitchenObjectSO()))
+                    {
+                        GetKitchenObject().DestroySelf();
+
+                        state = State.Idle;
+                        OnStateChange?.Invoke(this, new OnStateChangeEventArgs { state = state });
+
+                        OnProgressChange?.Invoke(this, new IHasProgress.OnProgressChangeEventArgs
+                        {
+                            progressNormalized = 0f
+                        });
+
+                     
+                    }
+                }
             }
             else
             {
                 GetKitchenObject().SetKitchenObjectParent(player);
                 state = State.Idle;
                 OnStateChange?.Invoke(this, new OnStateChangeEventArgs { state = state });
+
+                OnProgressChange?.Invoke(this, new IHasProgress.OnProgressChangeEventArgs
+                {
+                    progressNormalized = 0f
+                });
+
             }
         }
     }
