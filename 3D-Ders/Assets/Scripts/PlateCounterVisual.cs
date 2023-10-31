@@ -31,8 +31,6 @@ public class PlateCounterVisual : MonoBehaviour
         plateVisualTransform.localPosition = new Vector3(0,plateOfsetY*platesVisualGameObjectList.Count, 0);
 
         platesVisualGameObjectList.Add(plateVisualTransform.gameObject);
-        Debug.Log(platesVisualGameObjectList.Count);
-
     }
 
     private void PlateCounter_OnPlateRemoved(object sender, System.EventArgs e)
