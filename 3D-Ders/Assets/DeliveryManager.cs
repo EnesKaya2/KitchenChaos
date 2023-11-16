@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class DeliveryManager : MonoBehaviour
 {
+    public static DeliveryManager instance { get; private set; }
+
     [SerializeField] private RecipeListSO recipeListSO;
 
     [SerializeField] private List<RecipeSO> waitingRecipeListSO;
@@ -13,6 +15,7 @@ public class DeliveryManager : MonoBehaviour
 
     private void Awake()
     {
+        instance = this;
         waitingRecipeListSO = new List<RecipeSO>();
     }
 
@@ -29,5 +32,46 @@ public class DeliveryManager : MonoBehaviour
                 waitingRecipeListSO.Add(waitingRecipeSO);
             }
         }
+    }
+
+    public void DeliveryRecipe(PlateKitchenObject plateKitchenObject)
+    {
+        for (int i = 0; i < waitingRecipeListSO.Count; i++)
+        {
+            RecipeSO waitingRecipeSO = waitingRecipeListSO[i];
+
+            if (waitingRecipeSO.kitchenObjectSOList.Count == plateKitchenObject.GetKitchenObjectSOList().Count)
+            {
+                bool plateContentsMatchesRecipe = true;
+
+                foreach (KitchenObjectSO recipekitchenObjectSO in waitingRecipeSO.kitchenObjectSOList)
+                {
+                    bool ingredientFound = false;
+
+                    foreach (KitchenObjectSO platekitchenObjectSO in plateKitchenObject.GetKitchenObjectSOList())
+                    {
+                        if (platekitchenObjectSO == recipekitchenObjectSO)
+                        {
+                            ingredientFound = true;
+                            break;
+                        }
+                    }
+                    if (!ingredientFound)
+                    {
+                        plateContentsMatchesRecipe = false;
+                    }
+                }
+
+                if (plateContentsMatchesRecipe)
+                {
+                    Debug.Log("Doðru Malzeme Gönderildi");
+                    
+                    waitingRecipeListSO.RemoveAt(i);
+                    return;
+                }
+            }
+        }
+
+        Debug.Log("Player Doðru Recipe Gönderdi");
     }
 }
